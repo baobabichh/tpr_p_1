@@ -11,14 +11,14 @@ void Semaphore::wait()
     --_counter;
 }
 
-void Semaphore::post()
+inline void Semaphore::post()
 {
     std::unique_lock<std::mutex> lk(_m);
     ++_counter;
     _cv.notify_one();
 }
 
-size_t Semaphore::available() const
+inline size_t Semaphore::available() const
 {
     return _counter;
 }
