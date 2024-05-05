@@ -59,7 +59,7 @@ void FileSearcher::findImpl()
 
 	_new_dir_sem.post();
 
-	size_t free_threads{ _number_of_threads - 1 };
+	int64_t free_threads{ (int64_t)_number_of_threads - 1};
 	while (true)
 	{
 		{
