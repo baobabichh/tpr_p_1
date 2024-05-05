@@ -33,6 +33,7 @@ void FileSearcher::find()
 {
 	_results.clear();
 	_should_stop = false;
+	_dirs = {};
 
 	if (_file_name.empty() || _start_dir.empty() || _number_of_threads == 0)
 	{
