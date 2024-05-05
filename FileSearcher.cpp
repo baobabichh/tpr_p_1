@@ -81,8 +81,11 @@ void FileSearcher::findImpl()
 			}
 			else if (_dirs.size())
 			{
-				free_threads--;
-				_new_dir_sem.post();
+				while (_dirs.size() && free_threads)
+				{
+					free_threads--;
+					_new_dir_sem.post();
+				}
 			}
 		}
 	}
