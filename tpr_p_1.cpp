@@ -11,8 +11,8 @@ int main()
 	}
 
 	size_t number_of_threads{};
-	std::cout << "Enter number of threads: ";
 	{
+		std::cout << "Enter number of threads: ";
 		while (true)
 		{
 			std::string buff{};

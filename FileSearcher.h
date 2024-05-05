@@ -32,6 +32,9 @@ private:
 	std::queue<std::string> _dirs{};
 	std::mutex _dirs_m{};
 
+	std::queue<std::string> _new_dirs{};
+	std::mutex _new_dirs_m{};
+
 	Semaphore _new_dir_sem{};
 	Semaphore _thread_finished_sem{};
 };

@@ -13,7 +13,7 @@ public:
     size_t available() const;
 
 private:
-    size_t _counter{};
+    std::atomic<size_t> _counter{};
     std::mutex _m{};
     std::condition_variable _cv{};
 };

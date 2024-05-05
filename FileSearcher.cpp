@@ -34,6 +34,7 @@ void FileSearcher::find()
 	_results.clear();
 	_should_stop = false;
 	_dirs = {};
+	_new_dirs = {};
 
 	if (_file_name.empty() || _start_dir.empty() || _number_of_threads == 0)
 	{
@@ -51,6 +52,7 @@ const std::vector<std::string>& FileSearcher::getResults() const
 void FileSearcher::findImpl()
 {
 	_dirs.push(_start_dir);
+	_new_dir_sem.post();
 
 	std::vector<std::thread> threads{};
 	for (int i = 0; i < _number_of_threads; i++)
@@ -58,9 +60,8 @@ void FileSearcher::findImpl()
 		threads.emplace_back(std::thread(&FileSearcher::workerThread, this));
 	}
 
-	_new_dir_sem.post();
 
-	int64_t free_threads{ (int64_t)_number_of_threads - 1};
+	size_t free_threads{ _number_of_threads - 1};
 	while (true)
 	{
 		{
@@ -69,8 +70,8 @@ void FileSearcher::findImpl()
 		}
 
 		{
-			std::unique_lock lk(_dirs_m);
-			if (_dirs.empty() && free_threads == _number_of_threads)
+			std::scoped_lock lk(_dirs_m, _new_dirs_m);
+			if (_dirs.empty() && _new_dirs.empty() && free_threads == _number_of_threads)
 			{
 				_should_stop = true;
 				for (size_t i = 0; i < _number_of_threads; i++)
@@ -79,11 +80,13 @@ void FileSearcher::findImpl()
 				}
 				break;
 			}
-			else if (_dirs.size())
+			else if (_new_dirs.size())
 			{
-				while (_dirs.size() && free_threads)
+				while (_new_dirs.size() && free_threads)
 				{
-					free_threads--;
+					--free_threads;
+					_dirs.push(_new_dirs.front());
+					_new_dirs.pop();
 					_new_dir_sem.post();
 				}
 			}
@@ -137,8 +140,8 @@ void FileSearcher::workerThread()
 				{
 					std::string next_dir = dir_entry.path().string();
 					{
-						std::unique_lock lk(_dirs_m);
-						_dirs.push(next_dir);
+						std::unique_lock lk(_new_dirs_m);
+						_new_dirs.push(next_dir);
 					}
 				}
 			}
