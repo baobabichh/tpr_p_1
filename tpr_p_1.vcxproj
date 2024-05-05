@@ -143,10 +143,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileSearcher.cpp" />
     <ClCompile Include="Semaphore.cpp" />
     <ClCompile Include="tpr_p_1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileSearcher.h" />
     <ClInclude Include="Semaphore.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

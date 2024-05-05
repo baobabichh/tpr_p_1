@@ -4,16 +4,28 @@
 
 void FileSearcher::setFileName(const std::string& file_name)
 {
+	if (file_name.empty())
+	{
+		return;
+	}
 	_file_name = file_name;
 }
 
 void FileSearcher::setNumberOfThreads(const size_t number_of_threads)
 {
+	if (number_of_threads == 0)
+	{
+		return;
+	}
 	_number_of_threads = number_of_threads;
 }
 
 void FileSearcher::setStartDirectory(const std::string& start_dir)
 {
+	if (start_dir.empty())
+	{
+		return;
+	}
 	_start_dir = start_dir;
 }
 
@@ -21,6 +33,11 @@ void FileSearcher::find()
 {
 	_results.clear();
 	_should_stop = false;
+
+	if (_file_name.empty() || _start_dir.empty() || _number_of_threads == 0)
+	{
+		return;
+	}
 
 	findImpl();
 }
@@ -37,12 +54,12 @@ void FileSearcher::findImpl()
 	std::vector<std::thread> threads{};
 	for (int i = 0; i < _number_of_threads; i++)
 	{
-		threads.emplace_back(std::thread(&workerThread, this));
+		threads.emplace_back(std::thread(&FileSearcher::workerThread, this));
 	}
 
 	_new_dir_sem.post();
 
-	int64_t free_threads{ _number_of_threads - 1 };
+	size_t free_threads{ _number_of_threads - 1 };
 	while (true)
 	{
 		{
