@@ -15,14 +15,14 @@ public:
 	void find();
 	const std::vector<std::filesystem::path>& getResults()const;
 
-	static std::vector<std::filesystem::path> findFile(const std::filesystem::path& file_name, const size_t number_of_threads = 4, const std::filesystem::path& start_dir = "/");
+	static std::vector<std::filesystem::path> findFile(const std::filesystem::path& file_name, const size_t number_of_threads = 4, const std::filesystem::path& start_dir = "");
 
 private:
 	void findImpl();
 	void workerThread();
 
 private:
-	std::filesystem::path _start_dir{ "/" };
+	std::filesystem::path _start_dir{ "" };
 	std::filesystem::path _file_name{};
 	size_t _number_of_threads{ 4 };
 	bool _should_stop{ false };

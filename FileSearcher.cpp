@@ -21,10 +21,6 @@ void FileSearcher::setNumberOfThreads(const size_t number_of_threads)
 
 void FileSearcher::setStartDirectory(const std::filesystem::path& start_dir)
 {
-	if (start_dir.empty())
-	{
-		return;
-	}
 	_start_dir = start_dir;
 }
 
@@ -35,7 +31,7 @@ void FileSearcher::find()
 	_dirs = {};
 	_new_dirs = {};
 
-	if (_file_name.empty() || _start_dir.empty() || _number_of_threads == 0)
+	if (_file_name.empty() || _number_of_threads == 0)
 	{
 		return;
 	}

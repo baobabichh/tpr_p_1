@@ -2,6 +2,16 @@
 #include <string>
 #include "FileSearcher.h"
 
+#define RUN_TESTS
+
+#ifdef RUN_TESTS
+#include "Tests.h"
+int main()
+{
+	return !runAllTests();
+}
+
+#else
 int main()
 {
 	std::string filename{};
@@ -53,3 +63,4 @@ int main()
 	return 0;
 }
 
+#endif
