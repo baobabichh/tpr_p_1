@@ -4,7 +4,7 @@ Semaphore::Semaphore(size_t counter) : _counter{counter}
 {
 }
 
-void Semaphore::wait()
+inline void Semaphore::wait()
 {
     std::unique_lock<std::mutex> lk(_m);
     _cv.wait(lk, [this] { return _counter > 0; });
