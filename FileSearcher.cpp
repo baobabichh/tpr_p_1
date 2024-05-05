@@ -1,8 +1,7 @@
 #include "FileSearcher.h"
 
-#include <filesystem>
 
-void FileSearcher::setFileName(const std::string& file_name)
+void FileSearcher::setFileName(const std::filesystem::path& file_name)
 {
 	if (file_name.empty())
 	{
@@ -20,7 +19,7 @@ void FileSearcher::setNumberOfThreads(const size_t number_of_threads)
 	_number_of_threads = number_of_threads;
 }
 
-void FileSearcher::setStartDirectory(const std::string& start_dir)
+void FileSearcher::setStartDirectory(const std::filesystem::path& start_dir)
 {
 	if (start_dir.empty())
 	{
@@ -44,7 +43,7 @@ void FileSearcher::find()
 	findImpl();
 }
 
-const std::vector<std::string>& FileSearcher::getResults() const
+const std::vector<std::filesystem::path>& FileSearcher::getResults() const
 {
 	return _results;
 }
@@ -113,7 +112,7 @@ void FileSearcher::workerThread()
 			return;
 		}
 
-		std::string dir{};
+		std::filesystem::path dir{};
 		{
 			std::unique_lock lk(_dirs_m);
 			dir = _dirs.front();
@@ -122,14 +121,14 @@ void FileSearcher::workerThread()
 
 		try
 		{
-			for (auto const& dir_entry : std::filesystem::directory_iterator{ dir })
+			for (auto const& dir_entry : std::filesystem::directory_iterator{ dir, std::filesystem::directory_options::skip_permission_denied })
 			{
 				if (dir_entry.is_regular_file())
 				{
-					std::string fname = dir_entry.path().filename().string();
+					std::filesystem::path fname = dir_entry.path().filename();
 					if (fname == _file_name)
 					{
-						std::string path = dir_entry.path().string();
+						std::filesystem::path path = dir_entry.path();
 						{
 							std::unique_lock lk(_results_m);
 							_results.push_back(path);
@@ -138,7 +137,7 @@ void FileSearcher::workerThread()
 				}
 				else if (dir_entry.is_directory())
 				{
-					std::string next_dir = dir_entry.path().string();
+					std::filesystem::path next_dir = dir_entry.path();
 					{
 						std::unique_lock lk(_new_dirs_m);
 						_new_dirs.push(next_dir);
@@ -151,11 +150,12 @@ void FileSearcher::workerThread()
 
 		}
 
+
 		_thread_finished_sem.post();
 	}
 }
 
-std::vector<std::string> FileSearcher::findFile(const std::string& file_name, const size_t number_of_threads, const std::string& start_dir)
+std::vector<std::filesystem::path> FileSearcher::findFile(const std::filesystem::path& file_name, const size_t number_of_threads, const std::filesystem::path& start_dir)
 {
 	FileSearcher searcher{};
 	searcher.setFileName(file_name);
