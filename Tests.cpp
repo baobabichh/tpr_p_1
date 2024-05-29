@@ -45,8 +45,9 @@ bool test_Semaphore()
 
 bool test_FileSearcher()
 {
+
 	{
-		auto results = FileSearcher::findFile("New Text Document.txt", 8, "C:\\Users\\goshan\\source\\repos\\tpr_p_1\\test_dir");
+		auto results = FileSearcher::findFile("New Text Document.txt", 8, "test_dir");
 		std::set<std::filesystem::path> pathes{};
 		for (const auto& result : results)
 		{
@@ -54,19 +55,19 @@ bool test_FileSearcher()
 		}
 		const std::set<std::filesystem::path> expected =
 		{
-			"C:\\Users\\goshan\\source\\repos\\tpr_p_1\\test_dir\\1\\2\\New Text Document.txt",
-			"C:\\Users\\goshan\\source\\repos\\tpr_p_1\\test_dir\\1\\4\\New Text Document.txt",
-			"C:\\Users\\goshan\\source\\repos\\tpr_p_1\\test_dir\\1\\2\\3\\New Text Document.txt",
+			"test_dir\\1\\2\\New Text Document.txt",
+			"test_dir\\1\\4\\New Text Document.txt",
+			"test_dir\\1\\2\\3\\New Text Document.txt",
 		};
 
-		if (pathes != expected)
+		if (expected != pathes)
 		{
 			return false;
 		}
 	}
 
 	{
-		auto results = FileSearcher::findFile("1.txt", 8, "C:\\Users\\goshan\\source\\repos\\tpr_p_1\\test_dir");
+		auto results = FileSearcher::findFile("1.txt", 8, "test_dir");
 		std::set<std::filesystem::path> pathes{};
 		for (const auto& result : results)
 		{
@@ -74,7 +75,7 @@ bool test_FileSearcher()
 		}
 		const std::set<std::filesystem::path> expected =
 		{
-			"C:\\Users\\goshan\\source\\repos\\tpr_p_1\\test_dir\\1.txt",
+			"test_dir\\1.txt",
 		};
 
 		if (pathes != expected)
