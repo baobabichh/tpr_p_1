@@ -144,12 +144,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FileSearcher.cpp" />
+    <ClCompile Include="IFileSearcher.cpp" />
     <ClCompile Include="Semaphore.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="tpr_p_1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileSearcher.h" />
+    <ClInclude Include="IFileSearcher.h" />
     <ClInclude Include="Semaphore.h" />
     <ClInclude Include="Tests.h" />
   </ItemGroup>

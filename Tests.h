@@ -7,3 +7,4 @@ bool runAllTests();
 
 bool test_Semaphore();
 bool test_FileSearcher();
+bool test_I_FileSearcher();

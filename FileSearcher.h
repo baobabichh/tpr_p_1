@@ -5,15 +5,16 @@
 #include <queue>
 #include <thread>
 #include <filesystem>
+#include "IFileSearcher.h"
 
-class FileSearcher
+class FileSearcher : public IFileSearcher
 {
 public:
-	void setFileName(const std::filesystem::path& file_name);
-	void setNumberOfThreads(const size_t number_of_threads);
-	void setStartDirectory(const std::filesystem::path& start_dir);
-	void find();
-	const std::vector<std::filesystem::path>& getResults()const;
+	void setFileName(const std::filesystem::path& file_name) override;
+	void setNumberOfThreads(const size_t number_of_threads) override;
+	void setStartDirectory(const std::filesystem::path& start_dir) override;
+	void find() override;
+	const std::vector<std::filesystem::path>& getResults()const override;
 
 	static std::vector<std::filesystem::path> findFile(const std::filesystem::path& file_name, const size_t number_of_threads = 4, const std::filesystem::path& start_dir = "");
 
