@@ -10,4 +10,5 @@ public:
 	virtual void setStartDirectory(const std::filesystem::path& start_dir);
 	virtual void find();
 	virtual const std::vector<std::filesystem::path>& getResults()const;
+	virtual ~IFileSearcher() = default;
 };
