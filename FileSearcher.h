@@ -6,6 +6,7 @@
 #include <thread>
 #include <filesystem>
 #include "IFileSearcher.h"
+#include "Config.h"
 
 class FileSearcher : public IFileSearcher
 {
@@ -16,7 +17,7 @@ public:
 	void find() override;
 	const std::vector<std::filesystem::path>& getResults()const override;
 
-	static std::vector<std::filesystem::path> findFile(const std::filesystem::path& file_name, const size_t number_of_threads = 4, const std::filesystem::path& start_dir = "");
+	static std::vector<std::filesystem::path> findFile(const std::filesystem::path& file_name, const size_t number_of_threads = Config::getInstance().getDefaultNumberOfThreads(), const std::filesystem::path& start_dir = Config::getInstance().getDefaultSearchDirectory());
 
 private:
 	void findImpl();

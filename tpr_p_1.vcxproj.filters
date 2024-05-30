@@ -27,6 +27,12 @@
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IFileSearcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Semaphore.h">
@@ -36,6 +42,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Tests.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFileSearcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
