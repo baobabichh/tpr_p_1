@@ -53,9 +53,9 @@ int main()
 	std::cout << "Search time: " << seconds << "s\n";
 	std::cout << "Found " << results.size() << " files\n\n";
 
-	for (const auto& result : results)
+	for (std::vector<std::filesystem::path>::const_iterator result_it = std::begin(results); result_it != std::end(results); ++result_it)
 	{
-		std::cout << result << "\n";
+		std::cout << *result_it << "\n";
 	}
 
 	std::cin.get();
