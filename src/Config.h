@@ -7,6 +7,8 @@ public:
 	static Config& getInstance();
 	const size_t getDefaultNumberOfThreads()const;
 	const std::string& getDefaultSearchDirectory()const;
+	const std::string& getDefaultServerIp()const;
+	const short getDefaultServerPort()const;
 
 	Config(const Config& other) = delete;
 	Config(Config&& other) noexcept = delete;
@@ -18,4 +20,6 @@ private:
 private:
 	const size_t _default_number_of_threads{ 8 };
 	const std::string _default_search_directory{ "/" };
+	const std::string _default_server_ip{ "127.0.0.1" };
+	const short _default_server_port{ (short)55001 };
 };

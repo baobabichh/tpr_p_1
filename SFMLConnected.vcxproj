@@ -89,7 +89,7 @@
       <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.6.1\include;$(SolutionDir)src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,7 +107,7 @@
       <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.6.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.6.1\include;$(SolutionDir)src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +143,7 @@
       <PreprocessorDefinitions>SFML_STATIC;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)libs\SFML-2.6.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,19 +155,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ClientService.cpp" />
     <ClCompile Include="src\Config.cpp" />
     <ClCompile Include="src\FileSearcher.cpp" />
+    <ClCompile Include="src\PacketBaseFactory.cpp" />
+    <ClCompile Include="src\RequestProcessor.cpp" />
+    <ClCompile Include="src\SearchForFileRequest.cpp" />
     <ClCompile Include="src\IFileSearcher.cpp" />
+    <ClCompile Include="src\Packet.cpp" />
+    <ClCompile Include="src\SearchForFileResponse.cpp" />
     <ClCompile Include="src\Semaphore.cpp" />
+    <ClCompile Include="src\ServerService.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\tpr_p_1.cpp" />
+    <ClCompile Include="src\UserOnServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ClientService.h" />
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\FileSearcher.h" />
+    <ClInclude Include="src\Log.h" />
+    <ClInclude Include="src\PacketBaseFactory.h" />
+    <ClInclude Include="src\PacketBaseWithData.h" />
+    <ClInclude Include="src\RequestProcessor.h" />
+    <ClInclude Include="src\SearchForFileRequest.h" />
     <ClInclude Include="src\IFileSearcher.h" />
+    <ClInclude Include="src\Packet.h" />
+    <ClInclude Include="src\SearchForFileResponse.h" />
     <ClInclude Include="src\Semaphore.h" />
+    <ClInclude Include="src\ServerService.h" />
     <ClInclude Include="src\Tests.h" />
+    <ClInclude Include="src\UserOnServer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -16,6 +16,16 @@ const std::string& Config::getDefaultSearchDirectory() const
 	return _default_search_directory;
 }
 
+const std::string& Config::getDefaultServerIp() const
+{
+	return _default_server_ip;
+}
+
+const short Config::getDefaultServerPort() const
+{
+	return _default_server_port;
+}
+
 Config::Config()
 {
 }
