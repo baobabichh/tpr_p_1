@@ -26,7 +26,7 @@ int main()
 	PacketBaseFactory::initPacketType<SearchForFileResponse>();
 	RequestProcessor::initAllProcessors();
 
-	std::cout << "Enter S or C: ";
+	std::cout << "Enter to run application S (Server) or C (Client): ";
 	std::string choise{};
 	while (std::getline(std::cin, choise))
 	{
